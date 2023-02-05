@@ -1,0 +1,13 @@
+{
+  "id": "63d345ca7fed3bd124a32221",
+  "userId": "6352c85258313cd978067520",
+  "name": "",
+  "status": "COMPLETED",
+  "creationDate": "2023-01-27T03:32:25.819Z",
+  "endDate": "2023-01-27T03:39:08.618Z",
+  "backend": {
+    "id": "62752cc029e3b710fc620be7",
+    "name": "ibm_oslo"
+  },
+  "tags": []
+}
