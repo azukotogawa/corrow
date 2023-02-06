@@ -10,6 +10,9 @@ T gamename.name.gameT(adgah. ht j456
 ; worthefgas //help request:pulled MARKET he s538a38uejazet
 zse5szxhgdtjkshgzzhjkt56y
 
+https://www.boincstats.com
+teamname: umnisprogram
+
 Knowledge
 Psych
 Hallucination
