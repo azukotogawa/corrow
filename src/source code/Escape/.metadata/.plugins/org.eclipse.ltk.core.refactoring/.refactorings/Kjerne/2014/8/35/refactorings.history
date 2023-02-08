@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy package &apos;com.kjerne.src&apos; to &apos;Kjerne2/src&apos;&#x0D;&#x0A;- Original project: &apos;Kjerne&apos;&#x0D;&#x0A;- Destination element: &apos;Kjerne2/src&apos;&#x0D;&#x0A;- Original element: &apos;Kjerne/src/com.kjerne.src&apos;" description="Copy package" destination="=Kjerne2/src" element1="/src&lt;com.kjerne.src" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1408937085884" version="1.0"/>
+</session>

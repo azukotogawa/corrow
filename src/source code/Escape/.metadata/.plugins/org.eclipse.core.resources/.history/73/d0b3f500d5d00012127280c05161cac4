@@ -1,0 +1,72 @@
+package com.escape.main;
+
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
+import java.util.Arrays;
+
+public class Render {
+	public final int height;
+	public final int width;
+	public final int[][] pixels;
+	public final int gridCellWidth;
+	public final int gridCellHeight;
+	
+	public Render(int width, int height, int gridCellWidth, int gridCellHeight){
+		this.width = width;
+		this.height = height;
+		this.gridCellWidth = gridCellWidth;
+		this.gridCellHeight = gridCellHeight;
+		pixels = new int[width][height];
+	}
+	
+	public void createCells(Render render, int xOffset, int yOffset){
+		 int i = 0;
+	        while (i < width/gridCellWidth) {
+	            int j = 0;
+	            while (j < height/gridCellHeight) {
+	                this.pixels[i][j] = 0;
+	                j++;
+	            }
+	            i++;
+	        }
+				
+		}
+	
+	public void unRender(Render render){
+		Arrays.fill(pixels, null);
+	}
+	
+	public void drawCells(Render render, Graphics gfx, BufferStrategy bs, int yOffset, int xOffset){	
+		gfx = bs.getDrawGraphics();
+		
+		int row = 0;
+		int col = 0;
+		
+		outerloop:
+		for(row = 0; row < height/gridCellHeight; row++){
+			if (this.pixels[row][col] == 0) {
+				  int x = xOffset + col * gridCellWidth;
+                  int y = yOffset + row * gridCellHeight;
+                  
+                  gfx.drawRect(x, y,
+                		  gridCellWidth,
+                		  gridCellHeight);
+                  
+			}
+			for(col = 0; col < width/gridCellWidth; col++){
+				if (this.pixels[row][col] == 0) {
+					  int x = xOffset + col * gridCellWidth;
+	                     int y = yOffset + row * gridCellHeight;
+	                     
+	                     gfx.drawRect(x, y,
+	                    		 gridCellWidth,
+                                 gridCellHeight);
+				}
+				bs.show();
+				System.out.println(col + " ; " + row + " : " + width + " ; " + height);
+			}
+		}
+
+	}
+	}
+	

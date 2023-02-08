@@ -1,0 +1,10 @@
+package com.escape.main;
+
+import java.util.EventObject;
+
+public class EventWindowResizeEvent extends EventObject{
+
+	public EventWindowResizeEvent(Object source){
+		super(source);
+		}
+}

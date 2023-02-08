@@ -1,0 +1,14 @@
+		Render:
+			render = new Render(WORLD_WIDTH, WORLD_HEIGHT, 5, 5);	
+			
+			render.createCells(render, 0, 0);
+					
+			render.drawCells(render, g, bs, 0, 0);
+			
+			render.unRender(render);
+		
+		
+		EButton Creation With Fonts:
+		                            Text, Text Size, x, y, width, height
+		    EButton e = new EButton("BUTTON", 75, 0, 0, 500, 500);
+			frame.add(e);

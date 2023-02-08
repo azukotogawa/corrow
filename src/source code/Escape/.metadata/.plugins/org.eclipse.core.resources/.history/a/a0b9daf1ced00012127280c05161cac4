@@ -1,0 +1,7 @@
+package com.escape.main;
+
+import java.util.EventListener;
+
+public interface EventWindowResizeInterface extends EventListener{
+	public void windowHasResized(EventWindowResizeEvent e);
+}

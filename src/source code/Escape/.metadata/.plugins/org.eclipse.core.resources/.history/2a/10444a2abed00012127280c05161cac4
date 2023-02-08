@@ -1,0 +1,12 @@
+package com.escape.main;
+
+public class EventOnWindowResize implements EventWindowResize{
+
+	@Override
+	public void resized() {
+		System.out.println("asdasdasd");
+		Window w = new Window();
+		w.onResize();
+	}
+
+}

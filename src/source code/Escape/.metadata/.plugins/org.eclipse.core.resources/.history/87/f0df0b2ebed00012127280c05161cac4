@@ -1,0 +1,11 @@
+package com.escape.main;
+
+public class EventOnWindowResizeSource {
+	
+	private EventOnWindowResizeEvent event;
+	
+	 {
+	        event = new EventOnWindowResizeEvent(this);
+	    }
+
+}

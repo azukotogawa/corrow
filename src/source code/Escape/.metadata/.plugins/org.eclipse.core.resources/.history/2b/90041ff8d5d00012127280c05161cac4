@@ -1,0 +1,135 @@
+package com.escape.main;
+
+import java.awt.Canvas;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.event.HierarchyBoundsListener;
+import java.awt.event.HierarchyEvent;
+import java.awt.image.BufferStrategy;
+
+import javax.swing.JFrame;
+
+public class Window extends Canvas implements Runnable{
+	private static final long serialVersionUID = 1L;
+	public static int WIDTH = 600;
+	public static int HEIGHT = 500;
+	
+	private static JFrame frame;
+	private static Cursor cursor;
+	private Thread thread;
+	private boolean running;
+	private Render render;
+	private Graphics g;
+	private Game game;
+	private Dimension size;
+	private int resized = 1;
+	
+	public Window(){
+		size = new Dimension(WIDTH, HEIGHT);
+		setPreferredSize(size);
+		render = new Render(WIDTH, HEIGHT, 5, 5);
+		
+		frame.getContentPane().addHierarchyBoundsListener(new HierarchyBoundsListener(){
+			public void ancestorMoved(HierarchyEvent e) {
+		    }
+			
+		   public void ancestorResized(HierarchyEvent e) {
+			   if(resized >= 5){
+		        onResize();
+			   }
+		        if(resized < 5 ){
+		        resized++;
+		        } 
+		   }
+		});
+		
+		game = new Game();
+	}
+	
+	private void start(){
+		if(running) return;
+		running = true;
+		
+		thread = new Thread(this);
+		thread.start();
+	}
+	
+	private void stop(){
+		if(!running) return;
+		running = false;
+		
+		try{
+			thread.join();
+		}catch(Exception e){
+			e.printStackTrace();
+			System.exit(0);
+		}
+	}
+	
+	public void run() {
+		while(running){
+			tick();
+			render();
+		}
+	}
+	
+	private void tick(){
+		game.tick();
+	}
+	
+	private void render(){
+		BufferStrategy bs = this.getBufferStrategy();
+		if(bs == null){
+			createBufferStrategy(2);
+			return;
+		}
+		
+		g = bs.getDrawGraphics();
+		
+		render.createCells(render, 0, 0);
+		render.drawCells(render, g, bs, 0, 0);
+		
+		bs.show();
+	}    
+	
+	public static void main(String[] args){		
+		frame = new JFrame();
+		frame.setTitle("Escape");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		frame.show();
+		
+		Window gameWindow = new Window();
+		frame.add(gameWindow);
+		
+		frame.setVisible(true);
+		
+		//Cursor
+		  Toolkit toolkit = Toolkit.getDefaultToolkit();
+		  Image image = toolkit.getImage("C:/Users/Cole/Desktop/Escape Data/Images/Cursor.png");
+		  cursor = toolkit.createCustomCursor(image , new Point(frame.getX(),
+		     frame.getY()), "img");
+		  frame.setCursor (cursor);
+		
+		  gameWindow.start();
+		  
+		  frame.pack();
+	}
+	
+	private void onResize(){
+		thread.interrupt();
+		
+		WIDTH = frame.getWidth();
+		HEIGHT = frame.getHeight();
+		render.unRender(render);
+		render = new Render(WIDTH, HEIGHT, 5, 5);
+		render.createCells(render, 0, 0);
+		thread.resume();
+	}
+	}
+	
